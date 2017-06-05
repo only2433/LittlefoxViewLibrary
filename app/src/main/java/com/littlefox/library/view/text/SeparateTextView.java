@@ -1,7 +1,5 @@
 package com.littlefox.library.view.text;
 
-import com.littlefox.logmonitor.Log;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Spannable;
@@ -12,6 +10,8 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import com.littlefox.logmonitor.Log;
 
 /**
  * 한 텍스트에 두개의 다른 색이나 다른 크기의 Text를 보여주기 위한 Custom Text
@@ -84,8 +84,8 @@ public class SeparateTextView extends TextView
 	
 	/**
 	 * 텍스트에 각각 다른 사이즈를 적용
-	 * @param firstColor 1번 사이즈
-	 * @param secondColor 2번 사이즈
+	 * @param firstTextSize 1번 사이즈
+	 * @param secondTextSize 2번 사이즈
 	 * @return 만약 텍스트를 세팅하지 않았다면 NullPointerException 을 리턴
 	 */
 	public SeparateTextView setSeparateTextSize(int firstTextSize , int secondTextSize)

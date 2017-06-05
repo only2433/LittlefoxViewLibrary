@@ -1,23 +1,5 @@
 package com.littlefox.library.view.media;
 
-import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.Arrays;
-import java.util.Timer;
-
-import com.littlefox.library.common.CommonUtils;
-import com.littlefox.library.system.common.FileUtils;
-import com.littlefox.library.system.enc.Mp4Encrypt;
-import com.littlefox.logmonitor.Log;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -32,6 +14,23 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.littlefox.library.common.CommonUtils;
+import com.littlefox.library.system.common.FileUtils;
+import com.littlefox.logmonitor.Log;
+
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.util.Arrays;
+import java.util.Timer;
 
 public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder.Callback
 {
@@ -60,8 +59,7 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 	private long mPreiviewPlayTime 	= -1;
 	private float mCurrentDownloadTime = -1;
 	private long mMaxPlayTime		= -1;
-	
-	private Mp4Encrypt mMp4Encrypt;
+
 	
 	private int mCurrentMediaPlayerStatus = -1;
 	private int mCurrentSeekTime 			= -1;
@@ -480,33 +478,13 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 	 */
 	public void register(String basePath, ProgressiveMediaListener progressiveMediaListener)
 	{
-		mMp4Encrypt = Mp4Encrypt.getInstance();
-		mMp4Encrypt.setSaveBasePath(basePath);
 		ProgressiveMediaInformation.BASE_FILE_PATH = basePath;
 		mProgressiveMediaListener = progressiveMediaListener;
 		init();
 	}
 	
 	
-	/**
-	 * 모듈을 해제한다. 액티비티 종료시 반드시 호출
-	 */
-	public void unRegister()
-	{
-		release();
-		
-		try
-		{
-			if(mSavePath.equals("") == false)
-			{
-				mMp4Encrypt.encWrite(mSavePath);
-			}
-			
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+
 	
 	public String getCurrentFileSavePath()
 	{
@@ -668,13 +646,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			mMaxSeekProgress = (int) (lengthOfFile / 1000);
 			mProgressiveMediaListener.onSetSeekBarMaxProgress(mMaxSeekProgress);
 
-			try
-			{
-				mMp4Encrypt.decWrite(mSavePath, moutput);
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-			}
 
 			if ((remains <= DOWNLOAD_DONE) || (remains == fileSize))
 			{

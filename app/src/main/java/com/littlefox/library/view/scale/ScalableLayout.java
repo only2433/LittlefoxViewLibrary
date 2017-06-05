@@ -1,7 +1,6 @@
 package com.littlefox.library.view.scale;
 
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -23,7 +22,8 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
-import com.littlefox.commonviewlibrary.R;
+import com.littlefox.view.library.R;
+
 
 public class ScalableLayout extends FrameLayout {
     private static final float Default_Scale_Base_Width = 100f;

@@ -1,7 +1,6 @@
 package com.littlefox.library.view.dialog;
 
 
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,7 +18,8 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.littlefox.commonviewlibrary.R;
+import com.littlefox.view.library.R;
+
 
 /**
  * A Material style progress wheel, compatible up to 2.2.

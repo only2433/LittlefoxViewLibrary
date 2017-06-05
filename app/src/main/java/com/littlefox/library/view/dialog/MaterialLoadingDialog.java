@@ -1,6 +1,5 @@
 package com.littlefox.library.view.dialog;
 
-import com.littlefox.commonviewlibrary.R;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -8,6 +7,8 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import com.littlefox.view.library.R;
 
 /**
  * Loading Dialog 의 Material Style

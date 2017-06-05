@@ -18,9 +18,11 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
+import com.littlefox.view.library.R;
+
 import java.util.ArrayList;
 
-import com.littlefox.commonviewlibrary.R;
+
 
 /**
  * A helper class to enable automatically resizing {@link TextView}`s {@code textSize} to fit

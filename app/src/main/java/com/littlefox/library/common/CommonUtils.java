@@ -1,19 +1,19 @@
 package com.littlefox.library.common;
 
-import com.google.gson.Gson;
-import com.littlefox.library.view.object.DisPlayMetricsObject;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+
+import com.google.gson.Gson;
+import com.littlefox.library.view.object.DisPlayMetricsObject;
 
 
 
@@ -88,7 +88,6 @@ public class CommonUtils
 	 * @param context
 	 * @param key 해당 값의 키값
 	 * @param object 저장할 데이터
-	 * @param type 데이터의 타입
 	 */
 	public static void setSharedPreference(Context context,String key, Object object)
 	{

@@ -1,5 +1,6 @@
 package com.littlefox.library.view.extra;
 
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -8,7 +9,7 @@ import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.littlefox.commonviewlibrary.R;
+import com.littlefox.view.library.R;
 
 public class OutlineTextView extends TextView {
 	 

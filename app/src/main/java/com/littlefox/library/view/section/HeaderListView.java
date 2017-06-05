@@ -1,6 +1,5 @@
 package com.littlefox.library.view.section;
 
-import com.littlefox.commonviewlibrary.R;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -16,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import com.littlefox.view.library.R;
 
 public class HeaderListView extends RelativeLayout {
 

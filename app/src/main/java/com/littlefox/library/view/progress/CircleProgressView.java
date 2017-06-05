@@ -1,8 +1,6 @@
 package com.littlefox.library.view.progress;
 
 
-import com.littlefox.library.common.CommonUtils;
-import com.littlefox.commonviewlibrary.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,6 +8,9 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import com.littlefox.library.common.CommonUtils;
+import com.littlefox.view.library.R;
 
 public class CircleProgressView extends ImageView
 {

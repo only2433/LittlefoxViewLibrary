@@ -9,7 +9,8 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.littlefox.commonviewlibrary.R;
+import com.littlefox.view.library.R;
+
 
 public class LoadingDialog extends Dialog
 {

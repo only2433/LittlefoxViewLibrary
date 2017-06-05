@@ -6,7 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.littlefox.commonviewlibrary.R;
+import com.littlefox.view.library.R;
+
 
 public class SwipeDisableViewPager extends ViewPager
 {

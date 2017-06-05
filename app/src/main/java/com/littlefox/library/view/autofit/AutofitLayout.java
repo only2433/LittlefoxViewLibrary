@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.littlefox.view.library.R;
+
 import java.util.WeakHashMap;
 
-import com.littlefox.commonviewlibrary.R;
+
 
 /**
  * A {@link ViewGroup} that re-sizes the text of it's children to be no larger than the width of the

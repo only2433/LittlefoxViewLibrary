@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -30,6 +30,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.github.only2433:LittlefoxLogMoniter:1.0.0'
     compile 'com.github.only2433:LittlefoxSystemLibrary:1.0.0'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
 }
 
 
