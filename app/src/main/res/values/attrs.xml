@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- 
+    <declare-styleable name="Carousel">
+        <attr name="android:gravity" /> 
+
+        <attr name="android:animationDuration" />
+
+        <attr name="UseReflection" format="boolean"/>
+
+        <attr name="Items" format="integer"/>
+
+        <attr name="SelectedItem" format="integer"/>
+
+        <attr name="maxTheta" format="float"/>
+
+        <attr name="minQuantity" format="integer"/>
+
+        <attr name="maxQuantity" format="integer"/>
+
+        <attr name="Names" format="string" />
+
+    </declare-styleable>    
+	<declare-styleable name="ScaledLayout">
+		<attr name="scale_textsize" format="boolean" />
+		<attr name="scale_width" 	format="boolean" />
+		<attr name="scale_height" 	format="string" />
+	</declare-styleable>  
+	<declare-styleable name="ScaledLayout">
+		<attr name="ScaleWidth" 	format="float" />
+		<attr name="ScaleHeight" 	format="float" />
+	</declare-styleable>  
+     -->
+     
+    <declare-styleable name="OutlineTextView">
+        <attr name="textStroke" format="boolean"/>
+        <attr name="textStrokeWidth" format="float"/>
+        <attr name="textStrokeColor" format="color"/>
+	</declare-styleable>
+	
+    <declare-styleable name="SwipeDisableViewPager">
+  <attr name="swipeable" format="boolean" />
+</declare-styleable>
+	
+	<declare-styleable name="ScalableLayout">
+		<attr name="scale_base_width" 		format="float" />
+		<attr name="scale_base_height" 		format="float" />
+		<attr name="scale_textsize" 	format="float" />
+		<attr name="scale_top" 			format="float" />
+		<attr name="scale_left" 		format="float" />
+		<attr name="scale_width" 		format="float" />
+		<attr name="scale_height" format="float" />
+        <attr name="textview_wrapcontent_direction" format="string" />
+        <attr name="textview_wrapcontent_resizesurrounded" format="boolean" />
+        <attr name="textview_wrapcontent_movesiblings" format="boolean" />
+    </declare-styleable>
+   
+	<declare-styleable name="AutofitTextView">
+        <!-- Minimum size of the text. -->
+        <attr name="minTextSize" format="dimension" />
+        <!--
+        Amount of precision used to calculate the correct text size to fit within its
+        bounds. Lower precision is more precise and takes more time.
+        -->
+        <attr name="precision" format="float" />
+        <!-- Defines whether to automatically resize text to fit to the view's bounds. -->
+        <attr name="sizeToFit" format="boolean" />
+    </declare-styleable>    
+    
+    <declare-styleable name="ProgressWheel">
+        <attr name="matProg_progressIndeterminate" format="boolean" />
+        <attr name="matProg_barColor" format="color" />
+        <attr name="matProg_rimColor" format="color" />
+        <attr name="matProg_rimWidth" format="dimension" />
+        <attr name="matProg_spinSpeed" format="float" />
+        <attr name="matProg_barSpinCycleTime" format="integer" />
+        <attr name="matProg_circleRadius" format="dimension" />
+        <attr name="matProg_fillRadius" format="boolean" />
+        <attr name="matProg_barWidth" format="dimension" />
+        <attr name="matProg_linearProgress" format="boolean" />
+    </declare-styleable>
+
+</resources>
