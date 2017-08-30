@@ -32,6 +32,7 @@ public class AutofitLayout extends FrameLayout {
 
     public AutofitLayout(Context context) {
         super(context);
+
         init(context, null, 0);
     }
 
