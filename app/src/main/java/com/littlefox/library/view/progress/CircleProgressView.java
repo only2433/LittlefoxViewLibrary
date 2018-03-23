@@ -100,6 +100,7 @@ public class CircleProgressView extends ImageView
 		super.onDraw(canvas);
 		canvas.drawBitmap(mCurrentBitmap, 0, 0, null);
 		canvas.drawArc(mProgressRectF, -90, mCurrentPercent * (MAX_ARC/100), true, mPaint);
+
 		if(CommonUtils.isTablet(mContext))
 		{
 			canvas.drawBitmap(mCurrentCoverBitmap, CommonUtils.getPixel(mContext,15), CommonUtils.getPixel(mContext,14), null);

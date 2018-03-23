@@ -1,7 +1,5 @@
 package com.littlefox.library.view.controller;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.view.animation.Animation;
 
 import com.littlefox.logmonitor.Log;
+
+import java.util.ArrayList;
 
 /**
  * 자동 FadeOut를 하기위한 모듈 Controller
@@ -88,8 +88,7 @@ public class FadeAnimationController
 			@Override
 			public void onAnimationStart(Animation animation)
 			{
-				Log.i("index : "+ resultIndex + " , setAutoFadeOut : "+ controledlist.get(resultIndex).isAutoFadeOut());
-				controledlist.get(resultIndex).setAnimationing(true);
+
 			}
 			
 			@Override
@@ -137,8 +136,7 @@ public class FadeAnimationController
 				@Override
 				public void onAnimationStart(Animation animation)
 				{
-					Log.i("");
-					controledlist.get(resultIndex).setAnimationing(true);
+
 				}
 				
 				@Override
@@ -236,10 +234,13 @@ public class FadeAnimationController
 	public void startAnimation(View view, int type ,boolean autoFadeOut)
 	{
 		int resultIndex = getViewIndexInControledlist(view.getId());
-		
+		controledlist.get(resultIndex).setAnimationing(true);
+
+		Log.i("view.getId() : "+view.getId()+", type : "+type+" , isFadeOut : "+controledlist.get(resultIndex).isAutoFadeOut());
+
 		if(autoFadeOut == true)
 		{
-			Log.i("isFadeOut : "+controledlist.get(resultIndex).isAutoFadeOut());
+
 			controledlist.get(resultIndex).setAutoFadeOut(true);
 			Message msg = Message.obtain();
 			msg.what = MESSAGE_DELAY_ANIMATION;
@@ -248,7 +249,6 @@ public class FadeAnimationController
 		}
 		else
 		{
-			Log.i("view.getId() : "+view.getId()+", type : "+type+" , isFadeOut : "+controledlist.get(resultIndex).isAutoFadeOut());
 			controledlist.get(resultIndex).setAutoFadeOut(false);
 			Message msg = Message.obtain();
 			msg.what = MESSAGE_PROMPT_ANIMATION;
