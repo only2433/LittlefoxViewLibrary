@@ -190,7 +190,17 @@ public class FadeAnimationController
 	 */
 	public void addControlView(FadeAnimationInformation fadeAnimationInformation)
 	{
-		controledlist.add(fadeAnimationInformation);
+	    int addIndex = getViewIndexInControledlist(fadeAnimationInformation.getView().getId());
+
+	    if(addIndex == -1)
+        {
+            controledlist.add(fadeAnimationInformation);
+        }
+        else
+        {
+            controledlist.set(addIndex,fadeAnimationInformation);
+        }
+
 	}
 	
 	/**
