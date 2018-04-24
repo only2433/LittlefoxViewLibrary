@@ -1,7 +1,6 @@
 package com.littlefox.library.view.text;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -100,35 +99,22 @@ public class SeparateTextView extends TextView
 	}
 	
 	/**
-	 * 텍스트를 각각 볼드 처리를 위해 사용
-	 * @param isFirstTextBold 첫번째 텍스트를 볼드처리 할것인지의 여부
-	 * @param isSecondTextBold 두번째 텍스트를 볼드처리 할것인지의 여부
+	 * 텍스트를 각각 원하는 스타일 폰트로 변경
+	 * @param firstFontStyle 첫번째 텍스트의 폰트 스타일
+	 * @param secondFontStyle 두번째 텍스트의 폰트 스타일
 	 * @return
 	 */
-	public SeparateTextView setSeparateTextBold(boolean isFirstTextBold, boolean isSecondTextBold)
+	public SeparateTextView setSeparateTextBold(int firstFontStyle, int secondFontStyle)
 	{
 		if(mFirstString.equals("") || mSecondString.equals(""))
 		{
 			throw new NullPointerException();
 		}
-		if(isFirstTextBold)
-		{
-			mSpannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD),  0, mFirstString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		}
-		else
-		{
-			mSpannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL),  0, mFirstString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		}
-		
-		if(isSecondTextBold)
-		{
-			mSpannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), mFirstString.length()  , mFirstString.length()+mSecondString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		}
-		else
-		{
-			mSpannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), mFirstString.length()  , mFirstString.length()+mSecondString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		}
-		
+
+		mSpannableStringBuilder.setSpan(new StyleSpan(firstFontStyle),  0, mFirstString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+		mSpannableStringBuilder.setSpan(new StyleSpan(secondFontStyle), mFirstString.length()  , mFirstString.length()+mSecondString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
 		return this;
 	}
 
