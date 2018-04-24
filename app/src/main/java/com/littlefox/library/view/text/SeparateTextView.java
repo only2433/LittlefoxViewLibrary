@@ -104,7 +104,7 @@ public class SeparateTextView extends TextView
 	 * @param secondFontStyle 두번째 텍스트의 폰트 스타일
 	 * @return
 	 */
-	public SeparateTextView setSeparateTextBold(int firstFontStyle, int secondFontStyle)
+	public SeparateTextView setSeparateTextStyle(int firstFontStyle, int secondFontStyle)
 	{
 		if(mFirstString.equals("") || mSecondString.equals(""))
 		{
