@@ -10,8 +10,6 @@ import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.littlefox.logmonitor.Log;
-
 /**
  * 한 텍스트에 두개의 다른 색이나 다른 크기의 Text를 보여주기 위한 Custom Text
  * @author 정재현
@@ -70,7 +68,6 @@ public class SeparateTextView extends TextView
 	 */
 	public SeparateTextView setSeparateColor(int firstColor, int secondColor)
 	{
-		Log.i("mFirstString : "+ mFirstString+", mSecondString : "+ mSecondString);
 	
 		if(mFirstString.equals("") || mSecondString.equals(""))
 		{

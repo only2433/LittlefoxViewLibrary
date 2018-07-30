@@ -3,11 +3,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.github.only2433'
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,17 +20,24 @@ android {
     }
 }
 
+buildscript
+        {
+            ext.support_lib_version ='26.1.0'
+            ext.support_google_play ="12.0.1"
+        }
+
 dependencies {
-compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.github.only2433:LittlefoxLogMoniter:1.0.1'
-    compile 'com.github.only2433:LittlefoxSystemLibrary:1.0.0'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    implementation "com.android.support:appcompat-v7:$support_lib_version"
+    implementation "com.android.support:support-v4:$support_lib_version"
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.github.only2433:LittlefoxLogMoniter:1.0.1'
+    implementation 'com.github.only2433:LittlefoxSystemLibrary:1.0.0'
+    implementation "com.android.support:recyclerview-v7:$support_lib_version"
 }
 
 
