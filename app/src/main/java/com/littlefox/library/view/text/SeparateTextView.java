@@ -1,14 +1,16 @@
 package com.littlefox.library.view.text;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import com.littlefox.library.view.text.span.CustomTypefaceSpan;
 
 /**
  * 한 텍스트에 두개의 다른 색이나 다른 크기의 Text를 보여주기 위한 Custom Text
@@ -101,16 +103,16 @@ public class SeparateTextView extends TextView
 	 * @param secondFontStyle 두번째 텍스트의 폰트 스타일
 	 * @return
 	 */
-	public SeparateTextView setSeparateTextStyle(int firstFontStyle, int secondFontStyle)
+	public SeparateTextView setSeparateTextStyle(Typeface firstFontStyle, Typeface secondFontStyle)
 	{
 		if(mFirstString.equals("") || mSecondString.equals(""))
 		{
 			throw new NullPointerException();
 		}
 
-		mSpannableStringBuilder.setSpan(new StyleSpan(firstFontStyle),  0, mFirstString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		mSpannableStringBuilder.setSpan(new CustomTypefaceSpan(firstFontStyle),  0, mFirstString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		mSpannableStringBuilder.setSpan(new StyleSpan(secondFontStyle), mFirstString.length()  , mFirstString.length()+mSecondString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		mSpannableStringBuilder.setSpan(new CustomTypefaceSpan(secondFontStyle), mFirstString.length()  , mFirstString.length()+mSecondString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		return this;
 	}
