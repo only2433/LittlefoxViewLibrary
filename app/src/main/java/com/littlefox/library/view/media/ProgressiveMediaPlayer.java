@@ -344,13 +344,14 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 	 */
 	public void seekToMediaPlay(int progress)
 	{
+		Log.f("isDownloadComplete : "+ isDownloadComplete());
+		Log.f("progress : "+ progress +", mCurrentDownloadProgress : "+mCurrentDownloadProgress);
 		if(isDownloadComplete() == false && (progress > mCurrentDownloadProgress - ProgressiveMediaInformation.SECOND))
 		{
-			Log.i("progress : "+progress+", mCurrentDownloadProgress : "+mCurrentDownloadProgress);
 			int mediaCurrentPosition = mMediaPlayer.getDuration() / ProgressiveMediaInformation.SECOND;
 			int position = ((mCurrentDownloadProgress - ProgressiveMediaInformation.SECOND) * mediaCurrentPosition) / mMaxSeekProgress;
 			
-			Log.i("mediaCurrentPosition : "+mediaCurrentPosition+", position : "+position);
+			Log.f("mediaCurrentPosition : "+mediaCurrentPosition+", position : "+position);
 			mCurrentSeekTime = position * ProgressiveMediaInformation.SECOND;
 			mMediaPlayer.seekTo(mCurrentSeekTime);
 			
@@ -361,7 +362,7 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			int mediaCurrentPosition = mMediaPlayer.getDuration() / ProgressiveMediaInformation.SECOND;
 			int position = (progress * mediaCurrentPosition) / mMaxSeekProgress;
 			
-			Log.i("position : "+position);
+			Log.f("position : "+position);
 			mCurrentSeekTime = position * ProgressiveMediaInformation.SECOND;
 			mMediaPlayer.seekTo(mCurrentSeekTime);
 			mProgressiveMediaListener.onSeekComplete(getMediaPlayProgress());
