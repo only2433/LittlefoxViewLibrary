@@ -35,7 +35,7 @@ dependencies {
     implementation "com.android.support:support-v4:$support_lib_version"
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.code.gson:gson:2.8.0'
-    implementation 'com.github.only2433:LittlefoxLogMoniter:1.0.1'
+    implementation 'com.github.only2433:LittlefoxLogMoniter:1.0.4'
     implementation 'com.github.only2433:LittlefoxSystemLibrary:1.0.9'
     implementation "com.android.support:recyclerview-v7:$support_lib_version"
 }

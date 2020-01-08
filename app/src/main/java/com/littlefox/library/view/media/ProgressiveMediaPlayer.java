@@ -131,7 +131,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 		mMediaPlayer = new MediaPlayer();
 		mMediaPlayer.setOnBufferingUpdateListener(new OnBufferingUpdateListener()
 		{
-			
 			@Override
 			public void onBufferingUpdate(MediaPlayer mp, int percent)
 			{
@@ -157,7 +156,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			{
 				Log.i("mp currentDuration : "+ mp.getCurrentPosition() + ", Duration : "+ mp.getDuration());
 				setSurfaceBackground(null);
-				
 				play();
 			}
 		});
@@ -262,9 +260,7 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 	private boolean isPreviewDownloadAvailable(long currentFileSize, long maxFileSize)
 	{
 		boolean result = false;
-		
 		mCurrentDownloadTime = (float)(currentFileSize * mMaxPlayTime)/(float)maxFileSize;
-		
 		if(mPreiviewPlayTime >= mCurrentDownloadTime)
 		{
 			return true;
@@ -294,7 +290,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 				mProgressiveMediaListener.onPlayStart();
 			}
 			mMediaPlayer.start();
-			
 		}
 	}
 	
@@ -350,25 +345,32 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 		{
 			int mediaCurrentPosition = mMediaPlayer.getDuration() / ProgressiveMediaInformation.SECOND;
 			int position = ((mCurrentDownloadProgress - ProgressiveMediaInformation.SECOND) * mediaCurrentPosition) / mMaxSeekProgress;
-			
 			Log.f("mediaCurrentPosition : "+mediaCurrentPosition+", position : "+position);
 			mCurrentSeekTime = position * ProgressiveMediaInformation.SECOND;
 			mMediaPlayer.seekTo(mCurrentSeekTime);
-			
 			mProgressiveMediaListener.onSeekComplete(getMediaPlayProgress());
 		}
 		else
 		{
 			int mediaCurrentPosition = mMediaPlayer.getDuration() / ProgressiveMediaInformation.SECOND;
 			int position = (progress * mediaCurrentPosition) / mMaxSeekProgress;
-			
 			Log.f("position : "+position);
 			mCurrentSeekTime = position * ProgressiveMediaInformation.SECOND;
 			mMediaPlayer.seekTo(mCurrentSeekTime);
 			mProgressiveMediaListener.onSeekComplete(getMediaPlayProgress());
 		}
-		
 		CommonUtils.setSharedPreference(mContext, ProgressiveMediaInformation.PARAMS_CURRENT_PLAY_POSITION, mCurrentSeekTime);
+	}
+
+	/**
+	 * 파일 다운로드가 완료 되었을때 사용. 해당 메소드는 seekToMediaPlay 와 달리 해당 progress가 아닌 millisecond 를 전달한다.
+	 * @param millisecond 이동 시킬 밀리세컨드
+	 */
+	public void seekToMediaPlayWhenFullDownload(int millisecond)
+	{
+		Log.f("millisecond : "+ millisecond);
+		mMediaPlayer.seekTo(millisecond);
+		mProgressiveMediaListener.onSeekComplete(getMediaPlayProgress());
 	}
 	
 	/**
@@ -601,17 +603,13 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			int DEFAULT_TIMEOUT = 50000;
 			long fileSize = 0, remains = 0, lengthOfFile = 0;
 			boolean isProgressDownloadStart = false;
-
 			File file = new File(strPath);
-
 			File fileParent = new File(file.getParent());
-			
 			Log.i("fileParent path : "+ fileParent.getAbsolutePath()+", exist : "+fileParent.exists());
 			if(fileParent.exists() == false)
 			{
 				fileParent.mkdirs();
 			}
-			
 			if (file.exists() == false)
 			{
 				file.createNewFile();
@@ -620,18 +618,14 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			RandomAccessFile moutput = new RandomAccessFile(file.getAbsolutePath(), "rw");
 			FileChannel fc = moutput.getChannel();
 			fileSize = file.length();
-
 			if (fileSize > ProgressiveMediaInformation.PLAY_AVAILABLE_BYTE && isDownloadComplete == false)
 			{
 				byte[] newSearchData = new byte[4];
 				MappedByteBuffer MappByteBuff = fc.map(FileChannel.MapMode.READ_WRITE, 0, fileSize);
 				MappByteBuff.position((int) (fileSize - newSearchData.length));
 				MappByteBuff.get(newSearchData, 0, newSearchData.length);
-				
 				fileSize = getIntegerByByte(newSearchData);
-				
 				Log.f("Searched complete Saved File Size : " + fileSize);
-				
 			}
 
 			URL url = new URL(strUrl);
@@ -640,13 +634,11 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			conn.connect();
 			conn.setConnectTimeout(DEFAULT_TIMEOUT);
 			conn.setReadTimeout(DEFAULT_TIMEOUT);
-			
 			remains = conn.getContentLength();
 			lengthOfFile = remains + fileSize;
 			Log.f("isDownloadComplete : " +isDownloadComplete+", remains : "+remains+", fileSize : "+fileSize);
 			mMaxSeekProgress = (int) (lengthOfFile / 1000);
 			mProgressiveMediaListener.onSetSeekBarMaxProgress(mMaxSeekProgress);
-
 
 			if ((remains <= DOWNLOAD_DONE) || (remains == fileSize))
 			{
@@ -667,7 +659,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			if(mPreiviewPlayTime != -1 && isPreviewDownloadAvailable(fileSize - ProgressiveMediaInformation.PLAY_AVAILABLE_BYTE, lengthOfFile) == false)
 			{
 				mCurrentDownloadProgress = (int) ((fileSize - ProgressiveMediaInformation.MEGA_BYTE) / ProgressiveMediaInformation.SECOND);
-				
 				mProgressiveMediaListener.onDownloadComplete(mCurrentDownloadProgress);
 				mPlayerHandler.sendEmptyMessage(MESSAGE_PLAY_VIDEO);
 				moutput.close();
@@ -681,7 +672,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			moutput.seek(0);
 			while (dummyRemains > 0 && fileSize == 0)
 			{
-
 				if (dummyRemains <= dummy)
 				{
 					dummy = dummyRemains;
@@ -693,7 +683,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			InputStream input = conn.getInputStream();
 			byte data[] = new byte[1024 * 2];
 			int count = 0;
-
 			int mode = 0;
 			moutput.seek(fileSize);
 			while ((count = input.read(data)) != -1)
@@ -708,7 +697,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 				{
 					Log.i("Download End!!!");
 					mCurrentDownloadProgress = (int) ((fileSize - ProgressiveMediaInformation.MEGA_BYTE) / ProgressiveMediaInformation.SECOND);
-					
 					mProgressiveMediaListener.onDownloadComplete(mCurrentDownloadProgress);
 					break;
 				}
@@ -732,11 +720,9 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 					mCurrentDownloadProgress = (int) (fileSize / ProgressiveMediaInformation.SECOND);
 					mProgressiveMediaListener.onDownloadComplete(mCurrentDownloadProgress);
 				}
-
 			}
 			Log.i("fileSize : "+fileSize+", lengthOfFile : "+lengthOfFile + ", isDownloadComplete : "+isDownloadComplete);
-			
-			
+
 			if(fileSize >= lengthOfFile)
 			{
 				isDownloadComplete = true;
@@ -752,12 +738,10 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 				
 				Log.f("saved download File Size : "+fileSize);
 			}
-			
 			moutput.close();
 			input.close();
 			fc.close();
 			return fileSize;
-
 		}
 		
 		
@@ -781,7 +765,6 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			int source2 = source[1] & 0xFF;
 			int source3 = source[2] & 0xFF;
 			int source4 = source[3] & 0xFF;
-			
 			return ((source1 << 24) + (source2 << 16) + (source3 << 8) + (source4 << 0));
 		}
 
@@ -797,8 +780,5 @@ public class ProgressiveMediaPlayer extends SurfaceView implements SurfaceHolder
 			result[2] |= (byte)((source & 0xFF00)>>8);
 			result[3] |= (byte)((source & 0xFF));
 		}
-		
 	}
-	
-	
 }
