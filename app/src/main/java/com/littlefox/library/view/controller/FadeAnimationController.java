@@ -8,8 +8,6 @@ import android.view.animation.Animation;
 
 import com.littlefox.logmonitor.Log;
 
-import java.util.ArrayList;
-
 /**
  * 자동 FadeOut를 하기위한 모듈 Controller
  * @author 정재현
@@ -94,13 +92,13 @@ public class FadeAnimationController
 			@Override
 			public void onAnimationRepeat(Animation animation)
 			{
-				Log.i("");
+
 			}
 			
 			@Override
 			public void onAnimationEnd(Animation animation)
 			{
-				Log.i("");
+
 				controledlist.get(resultIndex).setAnimationing(false);
 				controledlist.get(resultIndex).clearAnimation();
 				
@@ -142,13 +140,12 @@ public class FadeAnimationController
 				@Override
 				public void onAnimationRepeat(Animation animation)
 				{
-					Log.i("");
+
 				}
 				
 				@Override
 				public void onAnimationEnd(Animation animation)
 				{
-					Log.i("");
 					controledlist.get(resultIndex).setAnimationing(false);
 					controledlist.get(resultIndex).clearAnimation();
 				}
@@ -177,7 +174,6 @@ public class FadeAnimationController
 		
 		if(resultIndex != -1)
 		{
-			Log.i("index : "+ resultIndex+", isAnimationing : "+ controledlist.get(resultIndex).isAnimationing());
 			return controledlist.get(resultIndex).isAnimationing();
 		}
 		
@@ -245,8 +241,6 @@ public class FadeAnimationController
 	{
 		int resultIndex = getViewIndexInControledlist(view.getId());
 		controledlist.get(resultIndex).setAnimationing(true);
-
-		Log.i("view.getId() : "+view.getId()+", type : "+type+" , isFadeOut : "+controledlist.get(resultIndex).isAutoFadeOut());
 
 		if(autoFadeOut == true)
 		{
