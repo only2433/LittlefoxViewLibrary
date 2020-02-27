@@ -6,7 +6,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.animation.Animation;
 
-import com.littlefox.logmonitor.Log;
+import java.util.ArrayList;
 
 /**
  * 자동 FadeOut를 하기위한 모듈 Controller
