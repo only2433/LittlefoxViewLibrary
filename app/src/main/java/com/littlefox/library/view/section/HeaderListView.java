@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 
 import com.littlefox.view.library.R;
 
+
 public class HeaderListView extends RelativeLayout {
 
     // TODO: Handle listViews with fast scroll
