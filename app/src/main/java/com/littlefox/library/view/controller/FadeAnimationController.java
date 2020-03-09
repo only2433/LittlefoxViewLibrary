@@ -36,7 +36,7 @@ public class FadeAnimationController
 				delayAnimation((Integer) msg.obj);
 				break;
 			case MESSAGE_PROMPT_ANIMATION:
-				promptAnimation((Integer) msg.obj, msg.arg1);
+				promptAnimation((Integer) msg.obj, null, msg.arg1);
 				break;
 			}
 		}
@@ -76,12 +76,20 @@ public class FadeAnimationController
 	 * @param viewId 해당 뷰의 ID
 	 * @param type FADE_IN : 나타나는 애니메이션 , FADE_OUT : 들어가는 애니메이션
 	 */
-	private void promptAnimation(int viewId, int type)
+	private void promptAnimation(int viewId, Animation animation, int type)
 	{
 		final int resultIndex = getViewIndexInControledlist(viewId);
-		Animation animation = type == TYPE_FADE_IN ? controledlist.get(resultIndex).getFadeInAnimation() : controledlist.get(resultIndex).getFadeOutAnimation();
-		controledlist.get(resultIndex).getView().startAnimation(animation);
-		animation.setAnimationListener(new Animation.AnimationListener()
+		Animation tempAnimation = null;
+		if(animation == null)
+		{
+			tempAnimation = type == TYPE_FADE_IN ? controledlist.get(resultIndex).getFadeInAnimation() : controledlist.get(resultIndex).getFadeOutAnimation();
+		}
+		else
+		{
+			tempAnimation = animation;
+		}
+		controledlist.get(resultIndex).getView().startAnimation(tempAnimation);
+		tempAnimation.setAnimationListener(new Animation.AnimationListener()
 		{
 			@Override
 			public void onAnimationStart(Animation animation)
@@ -196,7 +204,6 @@ public class FadeAnimationController
         {
             controledlist.set(addIndex,fadeAnimationInformation);
         }
-
 	}
 	
 	/**
@@ -229,6 +236,13 @@ public class FadeAnimationController
 	public void startAnimation(View view , int type)
 	{
 		startAnimation(view , type, false);
+	}
+
+	public void startAnimation(View view, Animation animation, int type)
+	{
+		int resultIndex = getViewIndexInControledlist(view.getId());
+		controledlist.get(resultIndex).setAnimationing(true);
+		promptAnimation(view.getId(), animation, type);
 	}
 	
 	/**

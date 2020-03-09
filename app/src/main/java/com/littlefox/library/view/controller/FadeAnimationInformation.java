@@ -11,6 +11,16 @@ public class FadeAnimationInformation
 	private int delay					= -1;
 	private boolean isAnimationing		= false;
 	private boolean isAutoFadeOut		= false;
+
+	/**
+	 * Controller에 넣을 뷰의 정보
+	 * @param view 해당의 뷰
+	 */
+	public FadeAnimationInformation(View view)
+	{
+		this.view 			= view;
+		isAutoFadeOut		= false;
+	}
 	
 	/**
 	 * Controller에 넣을 뷰의 정보
@@ -55,6 +65,17 @@ public class FadeAnimationInformation
 	{
 		return fadeOutAnimation;
 	}
+
+	public void setFadeInAnimation(Animation fadeInAnimation)
+	{
+		this.fadeInAnimation = fadeInAnimation;
+	}
+
+	public void setFadeOutAnimation(Animation fadeOutAnimation)
+	{
+		this.fadeOutAnimation = fadeOutAnimation;
+	}
+
 
 	public int getDelay()
 	{
