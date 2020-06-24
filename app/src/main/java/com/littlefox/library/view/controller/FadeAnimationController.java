@@ -36,7 +36,7 @@ public class FadeAnimationController
 				delayAnimation((Integer) msg.obj);
 				break;
 			case MESSAGE_PROMPT_ANIMATION:
-				promptAnimation((Integer) msg.obj, null, msg.arg1, false);
+				promptAnimation((Integer) msg.obj, null, msg.arg1);
 				break;
 			}
 		}
@@ -76,7 +76,7 @@ public class FadeAnimationController
 	 * @param viewId 해당 뷰의 ID
 	 * @param type FADE_IN : 나타나는 애니메이션 , FADE_OUT : 들어가는 애니메이션
 	 */
-	private void promptAnimation(int viewId, Animation animation, int type, final boolean isAnimationClear)
+	private void promptAnimation(int viewId, Animation animation, int type)
 	{
 		final int resultIndex = getViewIndexInControledlist(viewId);
 		Animation tempAnimation = null;
@@ -108,11 +108,7 @@ public class FadeAnimationController
 			{
 
 				controledlist.get(resultIndex).setAnimationing(false);
-
-				if(isAnimationClear)
-				{
-					controledlist.get(resultIndex).clearAnimation();
-				}
+				controledlist.get(resultIndex).clearAnimation();
 
 				controledlist.get(resultIndex).setAutoFadeOut(false);
 			}
@@ -242,11 +238,11 @@ public class FadeAnimationController
 		startAnimation(view , type, false);
 	}
 
-	public void startAnimation(View view, Animation animation, int type, boolean isAnimationClear)
+	public void startAnimation(View view, Animation animation, int type)
 	{
 		int resultIndex = getViewIndexInControledlist(view.getId());
 		controledlist.get(resultIndex).setAnimationing(true);
-		promptAnimation(view.getId(), animation, type, isAnimationClear);
+		promptAnimation(view.getId(), animation, type);
 	}
 	
 	/**
