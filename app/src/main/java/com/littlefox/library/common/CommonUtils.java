@@ -152,7 +152,7 @@ public class CommonUtils
      */
     public static Object getPreferenceObject(Context context , String key, Class className)
     {
-    	Object result = null;
+    	 Object result = null;
     	 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
     	 String loadObjectString = pref.getString(key, "");
     	 
