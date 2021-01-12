@@ -113,6 +113,7 @@ public class CircularProgressBar extends View {
 
     public void setProgressWidth(int width) {
         mStrokeWidth = width;
+
         invalidate();
     }
 
