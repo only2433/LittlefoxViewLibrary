@@ -90,12 +90,26 @@ public class CircularProgressBar extends View {
      * Set progress of the circular progress bar.
      * @param progress progress between 0 and 100.
      */
-    public void setProgress(int progress) {
-
-
+    public void setProgress(int progress)
+    {
         ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(progress));
         animator.setInterpolator(new DecelerateInterpolator());
         animator.setDuration(mAnimationDuration);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mSweepAngle = (float) valueAnimator.getAnimatedValue();
+                invalidate();
+            }
+        });
+        animator.start();
+    }
+
+    public void setMaxProgress(int duration)
+    {
+        ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(mMaxProgress));
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setDuration(duration);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
