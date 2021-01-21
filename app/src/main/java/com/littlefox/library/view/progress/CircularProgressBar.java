@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 
 /**
  * Simple single android view component that can be used to showing a round progress bar.
@@ -93,7 +93,7 @@ public class CircularProgressBar extends View {
     public void setProgress(int progress)
     {
         ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(progress));
-        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setInterpolator(new LinearInterpolator());
         animator.setDuration(mAnimationDuration);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -108,7 +108,7 @@ public class CircularProgressBar extends View {
     public void initProgress()
     {
         ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(0));
-        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setInterpolator(new LinearInterpolator());
         animator.setDuration(0);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -123,7 +123,7 @@ public class CircularProgressBar extends View {
     public void setMaxProgress(int duration)
     {
         ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(mMaxProgress));
-        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setInterpolator(new LinearInterpolator());
         animator.setDuration(duration);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
