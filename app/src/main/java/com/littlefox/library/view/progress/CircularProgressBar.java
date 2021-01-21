@@ -105,6 +105,21 @@ public class CircularProgressBar extends View {
         animator.start();
     }
 
+    public void initProgress()
+    {
+        ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(0));
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setDuration(0);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mSweepAngle = (float) valueAnimator.getAnimatedValue();
+                invalidate();
+            }
+        });
+        animator.start();
+    }
+
     public void setMaxProgress(int duration)
     {
         ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(mMaxProgress));
