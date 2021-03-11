@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class LinearLayoutScrollerManager extends LinearLayoutManager
 {
     private static float MILLISECONDS_PER_INCH = 100f;
+    private boolean isScrollEnabled = true;
 
 	public LinearLayoutScrollerManager(Context context)
 	{
@@ -66,5 +67,15 @@ public class LinearLayoutScrollerManager extends LinearLayoutManager
 		{
 			return SNAP_TO_START;
 		}
+	}
+
+	public void setScrollEnabled(boolean flag) {
+		this.isScrollEnabled = flag;
+	}
+
+	@Override
+	public boolean canScrollVertically() {
+		//Similarly you can customize "canScrollHorizontally()" for managing horizontal scroll
+		return isScrollEnabled && super.canScrollVertically();
 	}
 }
