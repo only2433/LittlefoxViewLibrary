@@ -33,6 +33,7 @@ public class CircularProgressBar extends View {
     private int mTextColor = Color.BLACK;       // Progress text color
 
     private final Paint mPaint;                 // Allocate paint outside onDraw to avoid unnecessary object creation
+    private ValueAnimator mValueAnimator;
 
     public CircularProgressBar(Context context) {
         this(context, null);
@@ -92,47 +93,55 @@ public class CircularProgressBar extends View {
      */
     public void setProgress(int progress)
     {
-        ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(progress));
-        animator.setInterpolator(new LinearInterpolator());
-        animator.setDuration(mAnimationDuration);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        mValueAnimator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(progress));
+        mValueAnimator.setInterpolator(new LinearInterpolator());
+        mValueAnimator.setDuration(mAnimationDuration);
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mSweepAngle = (float) valueAnimator.getAnimatedValue();
                 invalidate();
             }
         });
-        animator.start();
+        mValueAnimator.start();
     }
 
     public void initProgress()
     {
-        ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(0));
-        animator.setInterpolator(new LinearInterpolator());
-        animator.setDuration(0);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        mValueAnimator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(0));
+        mValueAnimator.setInterpolator(new LinearInterpolator());
+        mValueAnimator.setDuration(0);
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mSweepAngle = (float) valueAnimator.getAnimatedValue();
                 invalidate();
             }
         });
-        animator.start();
+        mValueAnimator.start();
     }
 
     public void setMaxProgress(int duration)
     {
-        ValueAnimator animator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(mMaxProgress));
-        animator.setInterpolator(new LinearInterpolator());
-        animator.setDuration(duration);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        mValueAnimator = ValueAnimator.ofFloat(mSweepAngle, calcSweepAngleFromProgress(mMaxProgress));
+        mValueAnimator.setInterpolator(new LinearInterpolator());
+        mValueAnimator.setDuration(duration);
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mSweepAngle = (float) valueAnimator.getAnimatedValue();
                 invalidate();
             }
         });
-        animator.start();
+        mValueAnimator.start();
+    }
+
+    public void cancelAnimation()
+    {
+        if(mValueAnimator != null)
+        {
+            mValueAnimator.cancel();
+        }
     }
 
     public void setProgressColor(int color) {
