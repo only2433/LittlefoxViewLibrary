@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.github.only2433:LittlefoxSystemLibrary:1.0.9'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.ssomai:android.scalablelayout:2.1.6'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 }
 
 

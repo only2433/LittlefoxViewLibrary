@@ -27,6 +27,8 @@ public class CommonUtils
 	public static final int TYPE_PARAMS_BOOLEAN = 0;
 	public static final int TYPE_PARAMS_INTEGER = 1;
 	public static final int TYPE_PARAMS_STRING	= 2;
+
+	public static final int SECOND = 1000;
 	
 	
 	public static void initDisplayMetrics(Context context)
