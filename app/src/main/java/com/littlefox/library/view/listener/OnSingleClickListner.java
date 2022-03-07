@@ -14,7 +14,7 @@ public abstract class OnSingleClickListner implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        if(SystemClock.elapsedRealtime() - mLastClickTime < CommonUtils.SECOND)
+        if(SystemClock.elapsedRealtime() - mLastClickTime < CommonUtils.HALF_SECOND)
         {
             return;
         }

@@ -29,6 +29,7 @@ public class CommonUtils
 	public static final int TYPE_PARAMS_STRING	= 2;
 
 	public static final int SECOND = 1000;
+	public static final int HALF_SECOND = 500;
 	
 	
 	public static void initDisplayMetrics(Context context)
