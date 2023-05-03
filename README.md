@@ -9,3 +9,10 @@
 안정성과 성능면에서도 높은 품질을 보장합니다.
 
 감사합니다!
+
+# Getting Started
+안드로이드 스튜디오나 gradle을 사용하시는 분께서는<br>
+아래 dependencies를 build.gradle에 추가해주시면 바로 사용해보실수 있습니다.
+```groovy
+implementation 'com.github.only2433:LittlefoxViewLibrary:1.1.7'
+```
