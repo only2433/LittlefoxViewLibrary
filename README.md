@@ -17,6 +17,42 @@
 implementation 'com.github.only2433:LittlefoxViewLibrary:1.1.7'
 ```
 
+# Usage
+#### 주요 사용 하는 모듈 
+- ViewAnimator
+    ```
+    View 애니메이션을 쉽게 할 수 있게 도와주는 Builder 패턴의 모듈
+    ```
+- Material Dialog
+    ```
+    Material 스타일의 지속적으로 로딩해서 화면에 표시하는 다이얼로그
+    ```
+- FadeAnimationController
+    ```
+    뷰가 Fade In/Out 될때, 동시에 여러 애니메이션을 해야하는 상황에, 
+    사용한다. Queue에 애니메이션을 적재하고, In/Out될때 pull 하여
+    애니메이션 여러개를 동작 시키는 모듈
+    ```    
+- SwipeDisableViewPager
+    ```
+    Swipe를 Disable 하기 위해 만듣 ViewPager
+    ```
+- ProgressiveMediaPlayer
+    ```
+    URL 영상을 다운로드 하면서 플레이 하기 위해 만든 영상 플레이어 모듈
+    ```
+- CircleProgressView
+    ```
+    Circle 로 된 프로그래스 바. 현재의 퍼센트 상태를 나타내기 위해 사용
+    보통 다운로드 될때, 사용 된다.
+    ```  
+- FixedSpeedScroller
+    ```
+    ViewPager의 이동 속도를 조절하기 위해 만든 Scroller
+    사용자가 주입한 시간에 따라 애니메이션 속도가 바뀐다.
+    ```    
+    
+    
 # License
 본 프로젝트는 MIT 라이선스를 따릅니다.<br>
 자세한 내용은 [LICENSE](https://github.com/only2433/LittlefoxViewLibrary/blob/master/License.md) 파일을 참고해주세요
