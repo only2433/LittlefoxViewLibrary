@@ -17,4 +17,9 @@
 implementation 'com.github.only2433:LittlefoxViewLibrary:1.1.7'
 ```
 
+# License
+본 프로젝트는 MIT 라이선스를 따릅니다.<br>
+자세한 내용은 [LICENSE](https://github.com/only2433/LittlefoxViewLibrary/blob/master/License.md) 파일을 참고해주세요
+
+
 
