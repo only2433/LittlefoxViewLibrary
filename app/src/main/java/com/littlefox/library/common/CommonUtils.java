@@ -23,7 +23,6 @@ public class CommonUtils
 	private static DisplayMetrics sDisPlayMetrics = null;
 	private static float sDisplayFactor = 0.0f;
 	private static final String PARAMS_DISPLAY_METRICS		= "display_metrics";
-	
 	public static final int TYPE_PARAMS_BOOLEAN = 0;
 	public static final int TYPE_PARAMS_INTEGER = 1;
 	public static final int TYPE_PARAMS_STRING	= 2;
