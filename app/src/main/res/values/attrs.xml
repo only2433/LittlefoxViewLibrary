@@ -39,8 +39,8 @@
 	</declare-styleable>
 	
     <declare-styleable name="SwipeDisableViewPager">
-  <attr name="swipeable" format="boolean" />
-</declare-styleable>
+        <attr name="swipeable" format="boolean" />
+    </declare-styleable>
    
 	<declare-styleable name="AutofitTextView">
         <!-- Minimum size of the text. -->
@@ -66,5 +66,6 @@
         <attr name="matProg_barWidth" format="dimension" />
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
+
 
 </resources>

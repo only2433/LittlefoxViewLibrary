@@ -51,11 +51,21 @@ public class CommonUtils
 			if(sDisplayFactor == 0.0f)
 			{
 				sDisplayFactor = (float)sDisPlayMetrics.widthPixels / 1920.0f;
+				if (sDisplayFactor == 0.0f)
+				{
+					if(isTablet(context))
+						sDisplayFactor = (float)sDisPlayMetrics.widthPixels / 1920.0f;
+					else
+						sDisplayFactor = (float)sDisPlayMetrics.widthPixels / 1080.0f;
+				}
 			}
 		}catch(NullPointerException e)
 		{
 			DisPlayMetricsObject object = (DisPlayMetricsObject)CommonUtils.getPreferenceObject(context, PARAMS_DISPLAY_METRICS, DisPlayMetricsObject.class);
-			sDisplayFactor = object.widthPixel / 1920.0f;
+			if(isTablet(context))
+				sDisplayFactor = object.widthPixel / 1920.0f;
+			else
+				sDisplayFactor = object.widthPixel / 1080.0f;
 		}
 		
 		return (int)(value * sDisplayFactor);

@@ -1,30 +1,33 @@
 package com.littlefox.library.view.text;
 
 import android.content.Context;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import androidx.annotation.Dimension;
+
+import com.littlefox.library.system.handler.WeakReferenceHandler;
+import com.littlefox.library.system.handler.callback.MessageHandlerCallback;
 import com.littlefox.view.library.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AutoRotateTextView extends TextSwitcher implements ViewSwitcher.ViewFactory
+public class AutoRotateTextView extends TextSwitcher implements ViewSwitcher.ViewFactory, MessageHandlerCallback
 {
+    private static final int MESSAGE_ROTATE = 100;
     private static final long DURATION_DEFAULT = 1000;
-    private static final float DEFAULT_TEXT_SIZE = 20.0f;
+    private static final int DEFAULT_TEXT_SIZE = 20;
     private ArrayList<String> mTextList;
     private int mCurrentIndex = 0;
     private long mCurrentDelay = DURATION_DEFAULT;
-    private float mCurrentTextSize = DEFAULT_TEXT_SIZE;
-    private Animation mInAnimation;
-    private Animation mOutAnimation;
+
+    private WeakReferenceHandler mMainHandler;
 
     public AutoRotateTextView(Context context)
     {
@@ -41,25 +44,37 @@ public class AutoRotateTextView extends TextSwitcher implements ViewSwitcher.Vie
     private void init()
     {
         setFactory(this);
-        mInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.push_right_in);
-        mOutAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.push_left_out);
-        setInAnimation(mInAnimation);
-        setOutAnimation(mOutAnimation);
+        mMainHandler = new WeakReferenceHandler(this);
     }
 
     private void startRotating()
     {
         if (mTextList != null && mTextList.size() > 0)
         {
-            setText(mTextList.get(mCurrentIndex));
-            mCurrentIndex = (mCurrentIndex + 1) % mTextList.size();
-            postDelayed(rotateRunnable, mCurrentDelay);
+            mMainHandler.sendEmptyMessage(MESSAGE_ROTATE);
         }
     }
 
     private void stopRotating()
     {
-        removeCallbacks(rotateRunnable);
+        mMainHandler.removeCallbacksAndMessages(null);
+    }
+
+    private void adjustTextViewSize(TextView textView)
+    {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.gravity = Gravity.CENTER;
+        textView.setLayoutParams(layoutParams);
+    }
+
+    private void adjustTextViewSize(TextView textView, int width, int height)
+    {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
+        layoutParams.gravity = Gravity.CENTER;
+        textView.setLayoutParams(layoutParams);
     }
 
     public void setTextList(ArrayList<String> list)
@@ -72,16 +87,53 @@ public class AutoRotateTextView extends TextSwitcher implements ViewSwitcher.Vie
         mCurrentDelay = delay;
     }
 
-    public void setFontSize(float size)
+    public void setTextSize(int viewIndex, int size)
     {
-        mCurrentTextSize = size;
+        View view = getChildAt(viewIndex);
+        if (view instanceof TextView) {
+            TextView textView = (TextView) view;
+            textView.setTextSize(Dimension.SP , size);
+        }
+    }
+
+    public void setTextSize(float textSize, int width, int height)
+    {
+        for(int i = 0; i < getChildCount(); i++)
+        {
+            View view = getChildAt(i);
+            if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                textView.setTextSize(Dimension.SP ,textSize);
+                adjustTextViewSize(textView, width, height);
+            }
+        }
+
+    }
+
+    public void setTextSize(float textSize, int width, int height, int gravity)
+    {
+        for(int i = 0; i < getChildCount(); i++)
+        {
+            View view = getChildAt(i);
+            if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                textView.setGravity(gravity);
+                textView.setTextSize(Dimension.SP ,textSize);
+                adjustTextViewSize(textView, width, height);
+            }
+        }
+    }
+
+    public void start()
+    {
+        startRotating();
     }
 
     @Override
     protected void onAttachedToWindow()
     {
         super.onAttachedToWindow();
-        startRotating();
+
     }
 
     @Override
@@ -95,17 +147,21 @@ public class AutoRotateTextView extends TextSwitcher implements ViewSwitcher.Vie
     public View makeView()
     {
         TextView textView = new TextView(getContext());
-        textView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-        textView.setTextSize(mCurrentTextSize);
+        textView.setGravity(Gravity.CENTER_VERTICAL);
+        adjustTextViewSize(textView);
         return textView;
     }
 
-    private Runnable rotateRunnable = new Runnable() {
-        @Override
-        public void run() {
-            setText(mTextList.get(mCurrentIndex));
-            mCurrentIndex = (mCurrentIndex + 1) % mTextList.size();
-            postDelayed(this, mCurrentDelay);
+    @Override
+    public void handlerMessage(Message msg)
+    {
+        switch (msg.what)
+        {
+            case MESSAGE_ROTATE:
+                setText(mTextList.get(mCurrentIndex));
+                mCurrentIndex = (mCurrentIndex + 1) % mTextList.size();
+                mMainHandler.sendEmptyMessageDelayed(MESSAGE_ROTATE, mCurrentDelay);
+                break;
         }
-    };
+    }
 }
